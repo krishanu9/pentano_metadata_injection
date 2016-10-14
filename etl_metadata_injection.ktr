@@ -5,6 +5,7 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -67,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;10&#x2f;11 23&#x3a;53&#x3a;19.007</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;10&#x2f;14 23&#x3a;08&#x3a;10.314</modified_date>
+  <modified_date>2016&#x2f;10&#x2f;15 00&#x3a;31&#x3a;46.926</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -75,9 +76,42 @@
   </notepads>
   <order>
   <hop> <from>Get rows from result</from><to>ETL Metadata Injection</to><enabled>Y</enabled> </hop>
-  <hop> <from>Microsoft Excel Input_source</from><to>ETL Metadata Injection</to><enabled>Y</enabled> </hop>
-  <hop> <from>Microsoft Excel Input target</from><to>ETL Metadata Injection</to><enabled>Y</enabled> </hop>
+  <hop> <from>Microsoft Excel Input_source</from><to>Add constants</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>ETL Metadata Injection</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>trim</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>both</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>512</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>ETL Metadata Injection</name>
     <type>MetaInject</type>
@@ -105,6 +139,26 @@
         <source_step>Get rows from result</source_step>
         <source_field>source_separator</source_field>
       </mapping>      <mapping>        <target_step_name>Text file output</target_step_name>
+        <target_attribute_key>OUTPUT_TRIM</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Add constants</source_step>
+        <source_field>trim</source_field>
+      </mapping>      <mapping>        <target_step_name>Select values</target_step_name>
+        <target_attribute_key>META_RENAME</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Add constants</source_step>
+        <source_field>field_name_target</source_field>
+      </mapping>      <mapping>        <target_step_name>Text file output</target_step_name>
+        <target_attribute_key>FILENAME</target_attribute_key>
+        <target_detail>N</target_detail>
+        <source_step>Get rows from result</source_step>
+        <source_field>dest_path</source_field>
+      </mapping>      <mapping>        <target_step_name>Select values</target_step_name>
+        <target_attribute_key>META_NAME</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Add constants</source_step>
+        <source_field>field_name_source</source_field>
+      </mapping>      <mapping>        <target_step_name>Text file output</target_step_name>
         <target_attribute_key>SEPARATOR</target_attribute_key>
         <target_detail>N</target_detail>
         <source_step>Get rows from result</source_step>
@@ -112,47 +166,47 @@
       </mapping>      <mapping>        <target_step_name>Text file input</target_step_name>
         <target_attribute_key>FIELD_TYPE</target_attribute_key>
         <target_detail>Y</target_detail>
-        <source_step>Microsoft Excel Input target</source_step>
-        <source_field>type</source_field>
+        <source_step>Add constants</source_step>
+        <source_field>field_source_type</source_field>
+      </mapping>      <mapping>        <target_step_name>Text file input</target_step_name>
+        <target_attribute_key>FIELD_TRIM_TYPE</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Add constants</source_step>
+        <source_field>trim</source_field>
       </mapping>      <mapping>        <target_step_name>Text file input</target_step_name>
         <target_attribute_key>FILENAME</target_attribute_key>
         <target_detail>Y</target_detail>
         <source_step>Get rows from result</source_step>
         <source_field>path</source_field>
       </mapping>      <mapping>        <target_step_name>Text file output</target_step_name>
-        <target_attribute_key>FILENAME</target_attribute_key>
-        <target_detail>N</target_detail>
-        <source_step>Get rows from result</source_step>
-        <source_field>dest_path</source_field>
-      </mapping>      <mapping>        <target_step_name>Text file output</target_step_name>
         <target_attribute_key>OUTPUT_FIELDNAME</target_attribute_key>
         <target_detail>Y</target_detail>
-        <source_step>Microsoft Excel Input target</source_step>
-        <source_field>field</source_field>
+        <source_step>Add constants</source_step>
+        <source_field>field_name_target</source_field>
       </mapping>      <mapping>        <target_step_name>Text file output</target_step_name>
         <target_attribute_key>EXTENSION</target_attribute_key>
         <target_detail>N</target_detail>
         <source_step>Get rows from result</source_step>
         <source_field>target_extension</source_field>
       </mapping>      <mapping>        <target_step_name>Text file input</target_step_name>
-        <target_attribute_key>FIELD_NAME</target_attribute_key>
-        <target_detail>Y</target_detail>
-        <source_step>Microsoft Excel Input_source</source_step>
-        <source_field>field</source_field>
-      </mapping>      <mapping>        <target_step_name>Text file input</target_step_name>
         <target_attribute_key>FILE_TYPE</target_attribute_key>
         <target_detail>N</target_detail>
         <source_step>Get rows from result</source_step>
         <source_field>source_extension</source_field>
+      </mapping>      <mapping>        <target_step_name>Text file input</target_step_name>
+        <target_attribute_key>FIELD_NAME</target_attribute_key>
+        <target_detail>Y</target_detail>
+        <source_step>Add constants</source_step>
+        <source_field>field_name_source</source_field>
       </mapping>      <mapping>        <target_step_name>Text file output</target_step_name>
         <target_attribute_key>OUTPUT_TYPE</target_attribute_key>
         <target_detail>Y</target_detail>
-        <source_step>Microsoft Excel Input target</source_step>
-        <source_field>type</source_field>
+        <source_step>Add constants</source_step>
+        <source_field>field_target_type</source_field>
       </mapping>    </mappings>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>432</xloc>
-      <yloc>16</yloc>
+      <xloc>352</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -205,110 +259,6 @@
     </step>
 
   <step>
-    <name>Microsoft Excel Input target</name>
-    <type>ExcelInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <header>Y</header>
-    <noempty>Y</noempty>
-    <stoponempty>N</stoponempty>
-    <filefield/>
-    <sheetfield/>
-    <sheetrownumfield/>
-    <rownumfield/>
-    <sheetfield/>
-    <filefield/>
-    <limit>0</limit>
-    <encoding/>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <accept_filenames>N</accept_filenames>
-    <accept_field/>
-    <accept_stepname/>
-    <file>
-      <name>&#x24;&#x7b;FILES&#x7d;&#x2f;filelist_metadata.xlsx</name>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
-    <fields>
-      <field>
-        <name>file_name</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>field</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>type</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-    </fields>
-    <sheets>
-      <sheet>
-        <name>target</name>
-        <startrow>0</startrow>
-        <startcol>0</startcol>
-        </sheet>
-    </sheets>
-    <strict_types>N</strict_types>
-    <error_ignored>N</error_ignored>
-    <error_line_skipped>N</error_line_skipped>
-    <bad_line_files_destination_directory/>
-    <bad_line_files_extension>warning</bad_line_files_extension>
-    <error_line_files_destination_directory/>
-    <error_line_files_extension>error</error_line_files_extension>
-    <line_number_files_destination_directory/>
-    <line_number_files_extension>line</line_number_files_extension>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
-    <spreadsheet_type>POI</spreadsheet_type>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Microsoft Excel Input_source</name>
     <type>ExcelInput</type>
     <description/>
@@ -355,7 +305,7 @@
         <group/>
       </field>
       <field>
-        <name>field</name>
+        <name>field_name_source</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -367,7 +317,43 @@
         <group/>
       </field>
       <field>
-        <name>type</name>
+        <name>field_source_type</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>file_name_target</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>field_name_target</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>field_target_type</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -406,8 +392,8 @@
     <spreadsheet_type>POI</spreadsheet_type>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
-      <yloc>160</yloc>
+      <xloc>640</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
