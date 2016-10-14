@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;10&#x2f;12 01&#x3a;05&#x3a;50.236</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;10&#x2f;14 19&#x3a;21&#x3a;17.337</modified_date>
+  <modified_date>2016&#x2f;10&#x2f;14 22&#x3a;23&#x3a;44.079</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -149,6 +149,54 @@
       </field>
       <field>
         <name>dest_path</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>source_separator</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>target_separator</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>source_extension</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>target_extension</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
